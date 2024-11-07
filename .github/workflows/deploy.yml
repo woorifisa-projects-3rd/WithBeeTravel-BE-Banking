@@ -105,7 +105,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
             # EC2에서 기존 컨테이너가 있을 경우 제거
-            CONTAINER_ID=$(sudo docker ps -q --filter "publish=9090")
+            CONTAINER_ID=$(sudo docker ps -q --filter "publish=9090:9090")
             
             if [ ! -z "$CONTAINER_ID" ]; then
               sudo docker stop $CONTAINER_ID
@@ -116,4 +116,4 @@ jobs:
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/banking:latest
             
             # 새로운 컨테이너로 실행
-            sudo docker run --name banking -d -p 9090 -e TZ=Asia/Seoul ${{ secrets.DOCKER_USERNAME }}/banking:latest
+            sudo docker run --name banking -d -p 9090:9090 -e TZ=Asia/Seoul ${{ secrets.DOCKER_USERNAME }}/banking:latest
