@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Table(name = "clients")
@@ -29,15 +32,7 @@ public class Client {
     @Column(name = "has_wibee_card", nullable = false)
     private int hasWibeeCard;
 
-    protected Client() {}
+    @OneToMany(mappedBy = "clients")
+    private List<Account> accounts = new ArrayList<>();
 
-    @Builder
-    public Client(Long id, String email, String password, String pinNumber, String name, int hasWibeeCard) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.pinNumber = pinNumber;
-        this.name = name;
-        this.hasWibeeCard = hasWibeeCard;
-    }
 }

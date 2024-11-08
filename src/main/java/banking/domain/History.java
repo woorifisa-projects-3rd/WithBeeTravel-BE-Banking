@@ -1,14 +1,17 @@
 package banking.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Table(name = "histories")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class History {
 
     @Id
@@ -19,10 +22,6 @@ public class History {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "curr", nullable = false)
-    private Currency currency;
 
     @Column(name = "date", nullable = false)
     private LocalDateTime date;
@@ -42,19 +41,7 @@ public class History {
     @Column(name = "is_wibee_card", nullable = false)
     private int isWibeeCard;
 
-    protected History() {}
 
-    @Builder
-    public History(Long id, Account account, Currency currency, LocalDateTime date,
-                   int rcvAm, int payAm, int balance, String rqspeNm, int isWibeeCard) {
-        this.id = id;
-        this.account = account;
-        this.currency = currency;
-        this.date = date;
-        this.rcvAm = rcvAm;
-        this.payAm = payAm;
-        this.balance = balance;
-        this.rqspeNm = rqspeNm;
-        this.isWibeeCard = isWibeeCard;
-    }
+
+
 }
