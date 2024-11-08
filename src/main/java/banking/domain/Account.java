@@ -1,12 +1,18 @@
 package banking.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Table(name = "accounts")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account {
 
     @Id
@@ -18,8 +24,7 @@ public class Account {
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
 
-    @JoinColumn(name = "product_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
     private Product product;
 
     @Column(name = "account_number")
@@ -28,16 +33,7 @@ public class Account {
     @Column(name ="balance")
     private Long balance;
 
-    protected Account(){};
-
-    @Builder
-    public Account(Long id, Client client, Product product, String accountNumber, Long balance) {
-        this.id = id;
-        this.client = client;
-        this.product = product;
-        this.accountNumber = accountNumber;
-        this.balance = balance;
-    }
-
+    @OneToMany(mappedBy = "account")
+    private List<History> histories = new ArrayList<>();
 
 }
