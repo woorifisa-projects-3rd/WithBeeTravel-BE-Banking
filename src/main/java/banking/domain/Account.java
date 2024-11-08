@@ -17,23 +17,21 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "account_id")
+    @Column(name = "account_id", nullable = false)
     private Long id;
 
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
 
     @Enumerated(EnumType.STRING)
     private Product product;
 
-    @Column(name = "account_number")
+    @Column(name = "account_number", nullable = false)
     private String accountNumber;
 
-    @Column(name ="balance")
+    @Column(name ="balance", nullable = false)
     private Long balance;
 
-    @OneToMany(mappedBy = "account")
-    private List<History> histories = new ArrayList<>();
 
 }

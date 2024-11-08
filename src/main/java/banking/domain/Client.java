@@ -32,7 +32,5 @@ public class Client {
     @Column(name = "has_wibee_card", nullable = false)
     private int hasWibeeCard;
 
-    @OneToMany(mappedBy = "clients")
-    private List<Account> accounts = new ArrayList<>();
 
 }

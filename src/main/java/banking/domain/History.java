@@ -33,15 +33,12 @@ public class History {
     private Integer payAm;
 
     @Column(name = "balance", nullable = false)
-    private Integer balance;
+    private int balance;
 
     @Column(name = "rqspe_nm", nullable = false)
     private String rqspeNm;
 
     @Column(name = "is_wibee_card", nullable = false)
-    private int isWibeeCard;
-
-
-
+    private boolean isWibeeCard;
 
 }
